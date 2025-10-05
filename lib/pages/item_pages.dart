@@ -10,38 +10,47 @@ class ItemPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(item.name)),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Hero(
-              tag: item.name,
-              child: Image.asset(
-                item.image,
-                width: double.infinity,
-                height: 250,
-                fit: BoxFit.cover,
-              ),
+      body: Column(
+        children: [
+          Hero(
+            tag: item.name,
+            child: Image.asset(
+              item.image,
+              fit: BoxFit.cover,
+              height: 250,
+              width: double.infinity,
             ),
-            const SizedBox(height: 16),
-            Text(
-              item.name,
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              'Harga: Rp${item.price}',
-              style: const TextStyle(fontSize: 20),
-            ),
-            Text('Stok: ${item.stock}', style: const TextStyle(fontSize: 18)),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Icon(Icons.star, color: Colors.amber),
-                Text('${item.rating}', style: const TextStyle(fontSize: 18)),
+                Text(
+                  item.name,
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Price: Rp${item.price}',
+                  style: const TextStyle(fontSize: 20, color: Colors.green),
+                ),
+                const SizedBox(height: 8),
+                Text('Stock: ${item.stock}'),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    const Icon(Icons.star, color: Colors.amber),
+                    Text(item.rating.toString()),
+                  ],
+                ),
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
