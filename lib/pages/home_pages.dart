@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import '../models/item.dart';
 import '../widgets/item_card.dart';
+import 'package:go_router/go_router.dart';
 
 class Homepage extends StatelessWidget {
-  Homepage({super.key});
+  const Homepage({super.key});
 
   final List<Item> items = const [
     Item(
@@ -41,7 +42,14 @@ class Homepage extends StatelessWidget {
               itemCount: items.length,
               itemBuilder: (context, index) {
                 final item = items[index];
-                return ItemCard(item: item);
+                return ItemCard(
+                  item: item,
+                  onTap: () {
+                    // Contoh navigasi ke halaman detail
+                    context.push('/item', extra: item); // pakai go_router
+                    // atau Navigator.push(context, MaterialPageRoute(builder: (_) => ItemPage(item: item)));
+                  },
+                );
               },
             ),
           ),

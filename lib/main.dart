@@ -1,28 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'pages/home_pages.dart';
-import 'models/item.dart';
 import 'pages/item_pages.dart';
+import 'models/item.dart';
 
 void main() {
-  runApp(const MyApp());
+  final router = GoRouter(
+    initialLocation: '/',
+    routes: [
+      GoRoute(path: '/', builder: (context, state) => const Homepage()),
+      GoRoute(
+        path: '/item',
+        builder: (context, state) {
+          final item = state.extra as Item;
+          return ItemPage(item: item);
+        },
+      ),
+    ],
+  );
+
+  runApp(MyApp(router: router));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final GoRouter router;
+  const MyApp({super.key, required this.router});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: router,
       title: 'Marketplace Demo',
-      initialRoute: '/',
-      routes: {'/': (context) => Homepage()},
-      onGenerateRoute: (settings) {
-        if (settings.name == '/item') {
-          final item = settings.arguments as Item;
-          return MaterialPageRoute(builder: (context) => ItemPage(item: item));
-        }
-        return null;
-      },
       theme: ThemeData(primarySwatch: Colors.deepPurple),
     );
   }
