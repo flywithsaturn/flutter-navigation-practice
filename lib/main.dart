@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Marketplace Demo',
       initialRoute: '/',
-      routes: {'/': (context) => const Homepage()},
+      routes: {'/': (context) => Homepage()},
       onGenerateRoute: (settings) {
         if (settings.name == '/item') {
           final item = settings.arguments as Item;
