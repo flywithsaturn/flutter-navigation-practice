@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:navigation_flutter/pages/home_pages.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MaterialApp(
+      home: Homepage(), // gunakan home, bukan named route
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
